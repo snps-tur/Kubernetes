@@ -1,0 +1,16 @@
+# service file is to establish connection between pods
+apiVersion: v1
+kind: Service
+metadata:
+  name: result    # name is important with this IP will be created, so instead of connecting via IP we could use the name to connect
+  labels:
+    app: result
+spec:
+  type: NodePort
+  ports:
+    - name: "result-service"
+      targetPort: 80
+      port: 8081
+      nodePort: 31001
+  selector:
+    app: result   #maps to pod with a label of "result"
